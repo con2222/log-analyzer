@@ -15,12 +15,13 @@ int main(int argc, char** argv) {
 	std::unique_ptr<LogParser> logParser = std::make_unique<LogParser>(argv[1], argv[2]);
 
 	logParser->analyze();
-	logParser->print_report();
+	std::string report = logParser->get_report();
 
 	auto end = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 
-	std::cout << "\n" << "Время выполнения: " << duration << " ms" << std::endl;
+
+	std::cout << report << "\n" << "Время выполнения: " << duration << " ms" << std::endl;
 
 	return 0;
 }

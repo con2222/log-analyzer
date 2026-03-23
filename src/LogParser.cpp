@@ -3,6 +3,7 @@
 // std
 #include <fstream>
 #include <iostream>
+#include <sstream>
 
 LogParser::LogParser(std::string_view filename, std::string_view level) : filename(filename), level(level) {}
 
@@ -24,14 +25,18 @@ void LogParser::analyze() {
 	}
 }
 
-void LogParser::print_report() const {
-	std::cout << "--- Отчет анализа логов\n"
-			  << "Всего проанализировано строк: " << totalLines << "\n"
-			  << "Найдено совпадений по уровню '" << level << "': " << matchCount << "\n\n"
-			  << "Первые совпадения:\n";
+std::string LogParser::get_report() const {
+	std::ostringstream report;
+
+	report << "--- Отчет анализа логов\n"
+		   << "Всего проанализировано строк: " << totalLines << "\n"
+		   << "Найдено совпадений по уровню '" << level << "': " << matchCount << "\n\n"
+		   << "Первые совпадения:\n";
 
 	int i = 1;
 	for (const auto& log : savedLogs) {
-		std::cout << i++ << ". " << log << "\n";
+		report << i++ << ". " << log << "\n";
 	}
+
+	return report.str();
 }
