@@ -5,9 +5,10 @@
 #include <iostream>
 #include <sstream>
 
-LogParser::LogParser(std::string_view filename, std::string_view level) : filename(filename), level(level) {}
+LogParser::LogParser() {}
 
-void LogParser::analyze() {
+void LogParser::analyze(std::string_view filename, std::string_view lv) {
+	level = lv;
 	std::ifstream file(filename.data());
 	if (!file.is_open()) {
 		std::cerr << "Error: can't open file\n";
