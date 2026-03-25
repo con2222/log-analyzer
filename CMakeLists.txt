@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 4.2.3 FATAL_ERROR)
+cmake_minimum_required(VERSION 4.2.3 FATAL_ERROR) # Примечание: убедись, что у тебя реально стоит эта версия, обычно сейчас актуальны версии 3.2x - 3.3x :)
 
 project(log-analyzer LANGUAGES CXX)
 
@@ -11,8 +11,9 @@ add_executable(log-analyzer src/main.cpp src/LogParser.cpp)
 
 target_include_directories(log-analyzer PRIVATE src/)
 
-if (MSVC)
+find_package(Threads REQUIRED)
+target_link_libraries(log-analyzer PRIVATE Threads::Threads)
 
-else()
-target_compile_options(log-analyzer PUBLIC -std=c++17 -Wall -Wextra -Werror)
+if (NOT MSVC)
+    target_compile_options(log-analyzer PRIVATE -Wall -Wextra -Werror)
 endif()
