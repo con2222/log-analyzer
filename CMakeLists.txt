@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 4.2.3 FATAL_ERROR) # Примечание: убедись, что у тебя реально стоит эта версия, обычно сейчас актуальны версии 3.2x - 3.3x :)
+cmake_minimum_required(VERSION 4.2.3 FATAL_ERROR)
 
 project(log-analyzer LANGUAGES CXX)
 
